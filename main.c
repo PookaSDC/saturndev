@@ -48,10 +48,8 @@ static	char*	nums[40][3] = {"01", "02", "03", "04", "05", "06", "07", "08", "09"
 
 typedef struct
 {
-    /* Must be the first field in our custom structure in order to let the storyboard retrieve where the location of our object is */
 	jo_3d_object_attributes	attributes;
 	int sprite_id;
-    // Add other attributes here or not ;)
 }	player_t;
 
 static	player_t	player;
@@ -79,7 +77,6 @@ void	initPlayer(player_t * curPlayer)
 
 jo_palette	*my_tga_palette_handling(void)
 {
-	// We create a new palette for each image. It's not optimal but OK for a demo.
 	jo_create_palette(&image_pal);
 	return (&image_pal);
 }
@@ -168,18 +165,15 @@ void	animate_player(void)
 	jo_storyboard               *storyboard;
 	jo_animation                *animation;
 
-	// We create a new storyboard for all saw (that means that you can use the same storyboard with multiple object)
 	storyboard = jo_storyboard_create(true, false);
-	// Now we add a new custom animation (smooth translation + rotation) (that means that you can add multiple animation)
+
 	animation = jo_storyboard_create_animation(storyboard, 0, 0);
 	animation->sin_radius = 10;
 	animation->translation_speed_y = 2;
 	animation->cos_radius = 4;
 	animation->translation_speed_x = 1;
 	//animation->rotation_speed = 10;
-	// Now we can animate any object
 	jo_storyboard_add_object(storyboard, &player);
-	// Next step in my_draw()
 }
 
 bool	update_player(void)
